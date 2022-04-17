@@ -18,6 +18,9 @@ jobs:
         uses: reposaur/reposaur@main
       
       - run: |
+          set -e
+          set -o pipefail
+
           gh api /orgs/reposaur/repos --paginate \
           | reposaur -p . \
           | jq -r '.[] | @base64' \
