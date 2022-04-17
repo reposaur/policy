@@ -27,6 +27,8 @@ jobs:
           set -e
           set -o pipefail
 
+          gh api /orgs/reposaur/repos --paginate
+
           gh api /orgs/reposaur/repos --paginate \
           | reposaur -p . \
           | jq -r '.[] | @base64' \
