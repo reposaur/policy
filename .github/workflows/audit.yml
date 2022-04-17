@@ -16,7 +16,13 @@ jobs:
 
       - name: Setup Reposaur
         uses: reposaur/reposaur@main
-      
+
+      - id: app-token
+        uses: getsentry/action-github-app-token@v1
+        with:
+          app_id: ${{ secrets.REPOSAUR_APP_ID }}
+          private_key: ${{ secrets.REPOSAUR_APP_PRIVATE_KEY }}
+
       - run: |
           set -e
           set -o pipefail
@@ -42,4 +48,4 @@ jobs:
             done
           }
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
