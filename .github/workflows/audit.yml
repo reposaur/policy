@@ -19,7 +19,7 @@ jobs:
       
       - run: |
           gh api /orgs/reposaur/repos --paginate \
-          | reposaur \
+          | reposaur -p . \
           | jq -r '.[] | @base64' \
           | {
             while read r; do
