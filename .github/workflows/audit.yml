@@ -41,10 +41,13 @@ jobs:
               branch=$(_r '.runs[0].properties.default_branch')
               commit_sha=$(gh api "/repos/$owner/$repo/branches/$branch" | jq -r '.commit.sha')
 
+              # We've some internal repositories that don't have access to Advanced Security
+              # features, since we're on a free plan. Thus the `|| true` in end of the command,
+              # to avoid the workflow to exit unsuccessfully in such cases.
               gh api "/repos/$owner/$repo/code-scanning/sarifs" \
                 -f sarif="$(_r '.' | gzip | base64)" \
                 -f commit_sha="$commit_sha" \
-                -f ref="refs/heads/$branch"
+                -f ref="refs/heads/$branch" || true 
             done
           }
         env:
