@@ -1,0 +1,42 @@
+name: Audit
+
+on:
+  push:
+  schedule:
+    - cron: 0 23 * * *
+  workflow_dispatch:
+
+jobs:
+  audit:
+    name: Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Reposaur
+        uses: reposaur/reposaur@main
+      
+      - run: |
+          gh api /orgs/reposaur/repos --paginate \
+          | reposaur \
+          | jq -r '.[] | @base64' \
+          | {
+            while read r; do
+              _r() {
+                echo ${r} | base64 -d | jq -r ${1}
+              }
+
+              owner=$(_r '.runs[0].properties.owner')
+              repo=$(_r '.runs[0].properties.repo')
+              branch=$(_r '.runs[0].properties.default_branch')
+              commit_sha=$(gh api "/repos/$owner/$repo/branches/$branch" | jq -r '.commit.sha')
+
+              gh api "/repos/$owner/$repo/code-scanning/sarifs" \
+                -f sarif="$(_r '.' | gzip | base64)" \
+                -f commit_sha="$commit_sha" \
+                -f ref="refs/heads/$branch"
+            done
+          }
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
