@@ -76,8 +76,16 @@ violation_default_branch_pull_request_code_owner_reviews_not_required {
 }
 
 # METADATA
+# title: Repository has Security & Analsysis features disabled
+violation_security_and_analysis_disabled {
+	not input.security_and_analysis
+}
+
+# METADATA
 # title: Repository has open Secret Scanning alerts
 violation_secret_scanning_alerts {
+	input.security_and_analysis == null
+
 	resp := github.request("GET /repos/{owner}/{repo}/secret-scanning/alerts", {
 		"owner": input.owner.login,
 		"repo": input.name,
