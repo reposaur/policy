@@ -1,6 +1,6 @@
 # Policy
 
-Library of policies for [Reposaur][https://github.com/reposaur/reposaur] organization.
+Library of policies for [Reposaur](https://github.com/reposaur/reposaur) organization.
 
 # License
 
