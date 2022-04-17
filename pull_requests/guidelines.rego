@@ -6,7 +6,7 @@ package pull_request
 #   Pull Request titles must follow
 #   [Conventional Commits](https://www.conventionalcommits.org) guidelines.
 violation_title_malformed {
-    not regex.match("(?i)^(\\w+)(\\(.*\\))?:.*", input.title)
+	not regex.match("(?i)^(\\w+)(\\(.*\\))?:.*", input.title)
 }
 
 # METADATA
@@ -15,5 +15,5 @@ violation_title_malformed {
 #   Pull Requests should have a body to help reviewers understanding
 #   the changes proposed and reducing time-to-merge.
 violation_title_malformed {
-    not regex.match("(?i)^(\\w+)(\\(.*\\))?:.*", input.title)
+	not regex.match("(?i)^(\\w+)(\\(.*\\))?:.*", input.title)
 }

@@ -7,7 +7,7 @@ package repository
 #   description helps other people discovering it and understanding
 #   its purpose.
 note_empty_description {
-    input.description == null
+	input.description == null
 }
 
 # METADATA
@@ -16,5 +16,5 @@ note_empty_description {
 #   It's important that repositories have meaningful topics. They
 #   help other people discovering it and understanding its purpose.
 note_no_topics {
-    count(input.topics) == 0
+	count(input.topics) == 0
 }
