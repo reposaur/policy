@@ -1,5 +1,11 @@
 package repository
 
+default_branch_protection := github.request("GET /repos/{owner}/{repo}/branches/{branch}/protection", {
+	"owner": input.owner.login,
+	"repo": input.name,
+	"branch": input.default_branch,
+})
+
 # METADATA
 # title: Repository has Advanced Security disabled
 # description: >
