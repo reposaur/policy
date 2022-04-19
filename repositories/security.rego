@@ -6,6 +6,24 @@ default_branch_protection := github.request("GET /repos/{owner}/{repo}/branches/
 	"branch": input.default_branch,
 })
 
+# Reposaur organization is on a free plan and certain
+# features aren't available for private repositories.
+skip[rules] {
+	input.visibility == "private"
+	rules = [
+		"advanced_security_disabled",
+		"secret_scanning_disabled",
+		"default_branch_unprotected",
+		"default_branch_allow_force_pushes",
+		"default_branch_conversation_resolution_not_required",
+		"default_branch_pull_request_reviews_not_required",
+		"default_branch_pull_request_code_owner_reviews_not_required",
+		"security_and_analysis_disabled",
+		"secret_scanning_alerts",
+		"vulnerability_alerts",
+	]
+}
+
 # METADATA
 # title: Repository has Advanced Security disabled
 # description: >
