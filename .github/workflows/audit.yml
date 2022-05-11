@@ -12,10 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Reposaur
-        uses: reposaur/reposaur@main
+        uses: actions/checkout@v3
 
       - id: app-token
         uses: getsentry/action-github-app-token@v1
@@ -23,32 +20,7 @@ jobs:
           app_id: ${{ secrets.REPOSAUR_APP_ID }}
           private_key: ${{ secrets.REPOSAUR_APP_PRIVATE_KEY }}
 
-      - run: |
-          set -e
-          set -o pipefail
-
-          gh api /orgs/reposaur/repos --paginate \
-          | reposaur -p . \
-          | jq -r '.[] | @base64' \
-          | {
-            while read r; do
-              _r() {
-                echo ${r} | base64 -d | jq -r ${1}
-              }
-
-              owner=$(_r '.runs[0].properties.owner')
-              repo=$(_r '.runs[0].properties.repo')
-              branch=$(_r '.runs[0].properties.default_branch')
-              commit_sha=$(gh api "/repos/$owner/$repo/branches/$branch" | jq -r '.commit.sha')
-
-              # We've some internal repositories that don't have access to Advanced Security
-              # features, since we're on a free plan. Thus the `|| true` in end of the command,
-              # to avoid the workflow to exit unsuccessfully in such cases.
-              gh api "/repos/$owner/$repo/code-scanning/sarifs" \
-                -f sarif="$(_r '.' | gzip | base64)" \
-                -f commit_sha="$commit_sha" \
-                -f ref="refs/heads/$branch" || true 
-            done
-          }
+      - name: Audit
+        uses: reposaur/repo-audit-action@main
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
