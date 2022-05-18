@@ -7,7 +7,7 @@ package repository
 #   description helps other people discovering it and understanding
 #   its purpose.
 note_empty_description {
-	input.description == null
+	not input.description
 }
 
 # METADATA
