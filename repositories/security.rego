@@ -1,4 +1,4 @@
-package repository
+package github.repository
 
 default_branch_protection := github.request("GET /repos/{owner}/{repo}/branches/{branch}/protection", {
 	"owner": input.owner.login,

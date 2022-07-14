@@ -1,4 +1,4 @@
-package repository
+package github.repository
 
 # METADATA
 # title: Repository description is empty
