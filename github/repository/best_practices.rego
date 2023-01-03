@@ -1,4 +1,4 @@
-package github.repository
+package reposaur.github.repository.best_practices
 
 # METADATA
 # title: Repository description is empty
@@ -6,6 +6,8 @@ package github.repository
 #   It's important that repositories have a description. The
 #   description helps other people discovering it and understanding
 #   its purpose.
+# schemas:
+#   - input: schema.github.repository
 note_empty_description {
 	not input.description
 }
@@ -15,6 +17,8 @@ note_empty_description {
 # description: >
 #   It's important that repositories have meaningful topics. They
 #   help other people discovering it and understanding its purpose.
-note_no_topics {
+# schemas:
+#   - input: schema.github.repository
+violation_no_topics {
 	count(input.topics) == 0
 }
