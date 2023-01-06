@@ -1,3 +1,9 @@
+# METADATA
+# scope: package
+# title: Repository Best Practices
+# description: Policy to ensure repositories are following industry best practices
+# custom:
+#   tags: [best-practices, guidelines]
 package reposaur.github.repository.best_practices
 
 # METADATA
