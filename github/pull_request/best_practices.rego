@@ -1,3 +1,9 @@
+# METADATA
+# scope: package
+# title: Pull Request Best Practices
+# description: Policy to ensure pull requests are following industry best practices
+# custom:
+#   tags: [best-practices, guidelines]
 package reposaur.github.pull_request.best_practices
 
 # METADATA
