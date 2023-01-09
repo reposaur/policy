@@ -14,6 +14,8 @@ package reposaur.github.repository.best_practices
 #   its purpose.
 # schemas:
 #   - input: schema.github.repository
+# custom:
+#   tags: [best-practices, guidelines]
 note_empty_description {
 	not input.description
 }
@@ -25,6 +27,8 @@ note_empty_description {
 #   help other people discovering it and understanding its purpose.
 # schemas:
 #   - input: schema.github.repository
+# custom:
+#   tags: [best-practices, guidelines]
 violation_no_topics {
 	count(input.topics) == 0
 }

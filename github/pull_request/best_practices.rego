@@ -12,6 +12,8 @@ package reposaur.github.pull_request.best_practices
 #   Pull Request titles must follow [Conventional Commits](https://www.conventionalcommits.org) guidelines.
 # schemas:
 #   - input: schema.github.pull_request
+# custom:
+#   tags: [best-practices, guidelines, conventional-commits]
 violation_title_malformed {
 	not regex.match("(?i)^(\\w+)(\\(.*\\))?(!)?:.*", input.title)
 }
