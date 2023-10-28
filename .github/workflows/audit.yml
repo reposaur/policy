@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: StyraInc/setup-regal@main
+        with:
+          version: latest
 
       - id: app-token
         uses: getsentry/action-github-app-token@v1
@@ -24,3 +27,5 @@ jobs:
         uses: reposaur/repo-audit-action@main
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+      - name: Lint
+        run: regal lint --format=github ./github
