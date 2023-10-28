@@ -4,6 +4,7 @@
 # description: Policy to ensure repositories are following industry best practices
 # custom:
 #   tags: [best-practices, guidelines]
+# entrypoint: true
 package reposaur.github.repository.best_practices
 
 # METADATA
