@@ -4,6 +4,7 @@
 # description: Policy to ensure pull requests are following industry best practices
 # custom:
 #   tags: [best-practices, guidelines]
+# entrypoint: true
 package reposaur.github.pull_request.best_practices
 
 # METADATA
@@ -15,5 +16,5 @@ package reposaur.github.pull_request.best_practices
 # custom:
 #   tags: [best-practices, guidelines, conventional-commits]
 violation_title_malformed {
-	not regex.match("(?i)^(\\w+)(\\(.*\\))?(!)?:.*", input.title)
+	not regex.match(`(?i)^(\\w+)(\\(.*\\))?(!)?:.*`, input.title)
 }

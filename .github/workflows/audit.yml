@@ -24,3 +24,8 @@ jobs:
         uses: reposaur/repo-audit-action@main
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+      - name: Lint
+        uses: StyraInc/setup-regal@main
+        with:
+          version: latest
+        run: regal lint --format=github ./github
